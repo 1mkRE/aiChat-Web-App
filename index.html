@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Matthias Krawczynski">
-  <title>MAK Chatbot</title>
+  <title>AI Chatbot</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="LogoTransparent.ico">
@@ -94,7 +94,17 @@
         background-color: #04AA6D;
         color: white;
     }
+
+    .legal-text{
+        margin-right: 4px;
+    }
+
+    .legal-content{
+        padding: 8px;
+    }
+
   </style>
+  <script src="init.js"></script>
 </head>
   
 <body>
@@ -120,13 +130,15 @@
 
     <p id="output" style="color:#fbdca1"></p>
     <div style="text-align:center"><button onclick="clearOutput()" style="text-align:center">Clear Output</button></div>
-    
-    
 
+    <div class="legal-content">
+      <span style="color:#fbdca1" class="legal-text">(c) 2023 - Matthias Krawczynski</span>
+    </div> 
+    
   <script>
-
     let open_ai_response;
     let question = "";
+    const key = `Bearer ${sksaZHdsdkjT233KLueuzuGG34wddasasjF6hgdlohfsv657HB9}`
 
     async function openai_test() {
 
@@ -136,7 +148,7 @@
     xhr.open("POST", url);
 
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Authorization", "Bearer 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");
+    xhr.setRequestHeader("Authorization", key);
 
     xhr.onreadystatechange = function () {
       
@@ -158,11 +170,12 @@
     var data = `{
       "model": "text-davinci-003",
       "prompt": "${message}",
-      "temperature": 1,
-      "max_tokens": 4000,
-      "top_p": 1,
+      "temperature": 0.5,
+      "max_tokens": 1024,
+      "top_p": 0,
       "frequency_penalty": 0,
-      "presence_penalty": 0
+      "presence_penalty": 0,
+      "logprobs": 10
     }`;
 
     
